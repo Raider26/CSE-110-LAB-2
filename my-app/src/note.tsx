@@ -23,6 +23,11 @@ function Note() {
     setCreateNote(initialNote);
   };
 
+  const deleteNoteHandler = (noteId: number) => {
+    const updatedNotes = notes.filter((note) => note.id !== noteId);
+    setNotes(updatedNotes);
+  };
+
   const editNoteHandler = (
     event: React.FormEvent<HTMLFormElement>,
     noteId: number
@@ -102,12 +107,14 @@ function Note() {
                 onClick={() => startEditing(note)}
               >
                 Edit
-              </button>{" "}
+              </button>
+
               <button
-                onClick={() => setNotes(notes.filter((n) => n.id !== note.id))}
+                style={{ backgroundColor: "#ff0000" }}
+                onClick={() => deleteNoteHandler(note.id)}
               >
                 x
-              </button>{" "}
+              </button>
             </div>
             <h2>{note.title}</h2>
             <p>{note.content}</p>
