@@ -6,7 +6,6 @@ interface FavoriteButtonProps {
   onToggleFavorite: (item: string) => void;
 }
 
-// Composant du bouton en forme de cœur
 const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   item,
   isFavorited,
