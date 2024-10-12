@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Label } from "./types";
 import { dummyNotesList } from "./constants";
 import FavoriteButton from "./favoriteButton";
 import FavoriteList from "./FavoriteList";
+import { ThemeContext } from "./themeContext";
 
 function Note() {
   const [notes, setNotes] = useState(dummyNotesList);
@@ -15,6 +16,8 @@ function Note() {
   };
   const [createNote, setCreateNote] = useState(initialNote);
   const [editingNoteId, setEditingNoteId] = useState<number | null>(null);
+
+  const currentTheme = useContext(ThemeContext);
 
   const createNoteHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -113,7 +116,14 @@ function Note() {
 
       <div className="notes-grid">
         {notes.map((note) => (
-          <div key={note.id} className="note-item">
+          <div
+            key={note.id}
+            className="note-item"
+            style={{
+              backgroundColor: currentTheme.background,
+              color: currentTheme.foreground,
+            }}
+          >
             <div className="notes-header">
               <FavoriteButton
                 item={note.id.toString()}
